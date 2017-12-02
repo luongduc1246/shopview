@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux'
-import todos from './todos'
-import visibilityFilter from './visibilityFilter'
-
+import language from './langReducer.js'
+import displayScreen from './screenReducer.js'
 const todoApp = combineReducers({
-  todos,
-  visibilityFilter
+  language,displayScreen
 })
 
 export default todoApp
