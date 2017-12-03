@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
-import Home from './../components/home.js';
+import InfoNews from './../components/infoNews.js';
 function mapStateToProps(state) {
 		return {
+      info:state.infoNews.info,
 			lang:state.language.lang
 		}
   }
@@ -10,8 +11,8 @@ mapDispatchToProps = (dispatch, ownProps) => {
 
   }
 }
-const HomeContainer =connect(
+const InfoNewsContainer =connect(
   mapStateToProps,mapDispatchToProps
-)(Home)
+)(InfoNews)
 
-export default HomeContainer;
+export default InfoNewsContainer;

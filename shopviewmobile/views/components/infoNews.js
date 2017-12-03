@@ -2,24 +2,23 @@ import React, { Component } from 'react';
 import {Text,View,AsyncStorage,FlatList,StyleSheet} from 'react-native';
 import Frisbee from 'frisbee';
 import cheerio from 'react-native-cheerio';
-class Home extends Component {
+class InfoNews extends Component {
   constructor(props) {
     super(props);
     console.log(props);
-    this.state={name:''};
   }
   load = async () => {
     try {
-      var b= await this.getListMenu();
-      this.setState({name:b});
+      var b= await this.getPage();
+      console.log(b);
     } catch (e) {
       console.error('Failed to load name.')
     }
   }
-  async getListMenu() {
+  async getPage() {
   	try {
   		const api = new Frisbee({
-  			baseURI: 'https://news.zing.vn',
+  			baseURI: `https://${this.props.info}`,
   			headers: {
   				'Accept': 'application/json',
   				'Content-Type': 'application/json'
@@ -29,18 +28,17 @@ class Home extends Component {
 
   	});
   	$=cheerio.load(res.body);
-  	 let listMenu = new Set();
-  	 $('li.parent a').each(function(i, elem){
-  				listMenu.add($(this).text());
+  	 let page = new Set();
+  	 $('#multimedia').each(function(i, elem){
+  				page.add($(this).text());
   	 });
-  	return listMenu;
+  	return page;
   	} catch(error) {
   		console.error(error);
   	}
   }
   componentWillMount() {
     this.load();
-    console.log('load');
   }
   componentWillUnmount() {
 
@@ -59,21 +57,11 @@ class Home extends Component {
       backgroundColor: 'skyblue',
     },
   });
-    var menu=[];
-    myarr=Array.from(this.state.name);
-    for (i=0;i<myarr.length;i++) {
-      menu[i]={key:myarr[i]}
-    }
     return (
       <View style={{flex:1}}>
-        <FlatList
-          style={styles.container}
-          data={menu}
-          renderItem={({item}) => <Text id={item.id} onPress={this.itemClick} style={styles.row}>{item.key}</Text>}
 
-        />
       </View>
     );
   }
 }
-export default Home;
+export default InfoNews;

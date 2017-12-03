@@ -6,6 +6,7 @@ import SearchContainer from './searchContainer.js';
 import HomeContainer from './homeContainer.js';
 import ShopContainer from './shopContainer.js';
 import SettingContainer from './settingContainer.js';
+import infoNewsContainer from './infoNewsContainer.js';
 function mapStateToProps(state) {
 	console.log(state);
 		return {
@@ -30,7 +31,7 @@ function mapStateToProps(state) {
 						dispatch(displayScreen(ShopContainer));
 					break;
 					case 'cog':
-						dispatch(displayScreen(SettingContainer));
+						dispatch(displayScreen(infoNewsContainer));
 					break;
 					default:
         		dispatch(displayScreen(HomeContainer));
